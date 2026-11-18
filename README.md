@@ -3,7 +3,7 @@
 A two-player Dots and Boxes game written in C. It runs in the terminal,
 on Alpine Linux inside a virtual machine.
 
-**Team:** _Name 1_ · _Name 2_
+**Team:** Khaled Saber · leonardo Khayyt
 
 ## Build and run
 
