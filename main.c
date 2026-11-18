@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "board.h"
 #include "display.h"
+#include "input.h"
 
 // Returns the player whose turn comes next.
 static char otherPlayer(char player)
@@ -28,15 +29,22 @@ int main()
     {
         printf("Player %c's turn. Enter the row and column of the first dot (e.g., A0 -> 0 0) and second dot:\n", player);
 
-        if (scanf("%d %d %d %d", &r1, &c1, &r2, &c2) != 4)
+        InputStatus input = readMove(&r1, &c1, &r2, &c2);
+        if (input == INPUT_END)
         {
-            printf("Could not read 4 numbers. The game was stopped.\n");
+            printf("\nNo more input. The game was stopped.\n");
             return EXIT_FAILURE;
         }
-
-        if (checkMove(&board, r1, c1, r2, c2) != MOVE_OK)
+        if (input == INPUT_BAD)
         {
-            printf("Invalid move. Try again.\n");
+            printf("Invalid input: type 4 numbers, for example: 0 0 0 1\n");
+            continue;
+        }
+
+        MoveStatus status = checkMove(&board, r1, c1, r2, c2);
+        if (status != MOVE_OK)
+        {
+            printMoveError(status);
             continue;
         }
 

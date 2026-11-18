@@ -5,6 +5,7 @@
 
 void printBoard(const Board *b);
 void printScores(const Board *b);
+void printMoveError(MoveStatus status);
 void printWinner(const Board *b);
 
 #endif  // DISPLAY_H_

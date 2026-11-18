@@ -5,20 +5,23 @@
 CC = gcc
 CFLAGS = -Wall -Werror -g -std=c11 -c
 
-SOURCES = main.c board.c display.c
+SOURCES = main.c board.c display.c input.c
 OBJECTS = $(SOURCES:.c=.o)
 OUTPUT = dotsandboxes
 
 $(OUTPUT): $(OBJECTS)
 	$(CC) -o $@ $^
 
-main.o: main.c board.h display.h
+main.o: main.c board.h display.h input.h
 	$(CC) $(CFLAGS) -o $@ $<
 
 board.o: board.c board.h
 	$(CC) $(CFLAGS) -o $@ $<
 
 display.o: display.c display.h board.h
+	$(CC) $(CFLAGS) -o $@ $<
+
+input.o: input.c input.h
 	$(CC) $(CFLAGS) -o $@ $<
 
 .PHONY: clean

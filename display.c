@@ -67,6 +67,25 @@ void printScores(const Board *b)
     printf("%s\n", SEPARATOR);
 }
 
+// Tells the player why their move was not accepted.
+void printMoveError(MoveStatus status)
+{
+    switch (status)
+    {
+        case MOVE_OUT_OF_RANGE:
+            printf("Invalid move: rows go from 0 to %d and columns from 0 to %d. Try again.\n", DOT_ROWS - 1, DOT_COLS - 1);
+            break;
+        case MOVE_NOT_ADJACENT:
+            printf("Invalid move: the two dots must be next to each other (same row or same column). Try again.\n");
+            break;
+        case MOVE_TAKEN:
+            printf("Invalid move: this line is already drawn. Try again.\n");
+            break;
+        default:
+            break;
+    }
+}
+
 // Announces the result at the end of the game: who won, or a tie.
 void printWinner(const Board *b)
 {
