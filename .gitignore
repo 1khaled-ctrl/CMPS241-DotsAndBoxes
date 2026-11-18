@@ -1,5 +1,4 @@
 # Files made by "make" (do not commit them)
 *.o
 dotsandboxes
-.bat
-.exe
+test_board
