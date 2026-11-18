@@ -1,3 +1,4 @@
 # Files made by "make" (do not commit them)
 *.o
 dotsandboxes
+.bat
