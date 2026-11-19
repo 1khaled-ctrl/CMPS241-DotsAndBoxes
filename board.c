@@ -30,11 +30,11 @@ static int hasFourSides(const Board *b, int r, int c)
 // Gives a box to the player if the box exists, has no owner yet and is now closed. Returns 1 if the player got it.
 static int claimBox(Board *b, int r, int c, char player)
 {
-    if (r < 0 || r >= BOX_ROWS || c < 0 || c >= BOX_COLS)
+    if (r < 0 || r >= BOX_ROWS || c < 0 || c >= BOX_COLS) // out of our game's board
     {
         return 0;
     }
-    if (b->owner[r][c] != NO_OWNER || !hasFourSides(b, r, c))
+    if (b->owner[r][c] != NO_OWNER || !hasFourSides(b, r, c)) //someone already owns the box or not 4 sides
     {
         return 0;
     }
@@ -91,9 +91,9 @@ MoveStatus checkMove(const Board *b, int r1, int c1, int r2, int c2)
         return MOVE_OUT_OF_RANGE;
     }
 
-    orderDots(&r1, &c1, &r2, &c2);
+    orderDots(&r1, &c1, &r2, &c2); // example: to not consider "0 0 0 1" and "0 1 0 0" different
 
-    if (r1 == r2 && c2 == c1 + 1)
+    if (r1 == r2 && c2 == c1 + 1) //horizontal line
     {
         if (b->hLines[r1][c1])
         {
@@ -101,7 +101,7 @@ MoveStatus checkMove(const Board *b, int r1, int c1, int r2, int c2)
         }
         return MOVE_OK;
     }
-    if (c1 == c2 && r2 == r1 + 1)
+    if (c1 == c2 && r2 == r1 + 1) //vertical line
     {
         if (b->vLines[r1][c1])
         {
@@ -123,8 +123,8 @@ int applyMove(Board *b, int r1, int c1, int r2, int c2, char player)
     if (r1 == r2)
     {
         b->hLines[r1][c1] = 1;
-        completed += claimBox(b, r1 - 1, c1, player);
-        completed += claimBox(b, r1, c1, player);
+        completed += claimBox(b, r1 - 1, c1, player);  //checks box above
+        completed += claimBox(b, r1, c1, player);  //checks box below
     }
     else
     {

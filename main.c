@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> //  EXIT_FAILURE = 1     EXIT_SUCCESS = 0
 #include "board.h"
 #include "display.h"
 #include "input.h"

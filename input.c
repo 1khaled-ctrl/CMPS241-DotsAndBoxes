@@ -3,20 +3,19 @@
 
 #define LINE_SIZE 100
 
-// Reads the move typed by the player and accepts it only if it is exactly 4 numbers.
-// Returns INPUT_OK if it was typed correctly, INPUT_BAD if not, and INPUT_END if there is no more input (Ctrl+D).
+// Accepts an input only if it is exactly 4 numbers.
 InputStatus readMove(int *r1, int *c1, int *r2, int *c2)
 {
     char line[LINE_SIZE];
-    char extra;
+    char extra; //accounts for any other stuff typed after the correct input ex: 0 0 0 1 'ahdhdsdsh'
 
-    if (fgets(line, LINE_SIZE, stdin) == NULL)
+    if (fgets(line, LINE_SIZE, stdin) == NULL) //user closed input ex: Ctrl+D
     {
         return INPUT_END;
     }
-    if (sscanf(line, "%d %d %d %d %c", r1, c1, r2, c2, &extra) != 4)
-    {
-        return INPUT_BAD;
-    }
+    if (sscanf(line, "%d %d %d %d %c", r1, c1, r2, c2, &extra) != 4) // it return the number of chars it filled
+    {                                                                //it transforms a letter '1' to the num '1'
+        return INPUT_BAD;                                            //if not num ex: 'a' it will crash
+    }                                                                
     return INPUT_OK;
 }
