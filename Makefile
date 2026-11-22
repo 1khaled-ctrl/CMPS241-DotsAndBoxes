@@ -6,7 +6,7 @@
 CC = gcc
 CFLAGS = -Wall -Werror -g -std=c11 -c
 
-SOURCES = main.c board.c display.c input.c
+SOURCES = main.c board.c display.c input.c bot.c
 OBJECTS = $(SOURCES:.c=.o)
 OUTPUT = dotsandboxes
 TEST_OUTPUT = test_board
@@ -14,7 +14,7 @@ TEST_OUTPUT = test_board
 $(OUTPUT): $(OBJECTS)
 	$(CC) -o $@ $^
 
-main.o: main.c board.h display.h input.h
+main.o: main.c board.h display.h input.h bot.h
 	$(CC) $(CFLAGS) -o $@ $<
 
 board.o: board.c board.h
@@ -24,6 +24,9 @@ display.o: display.c display.h board.h
 	$(CC) $(CFLAGS) -o $@ $<
 
 input.o: input.c input.h
+	$(CC) $(CFLAGS) -o $@ $<
+
+bot.o: bot.c bot.h board.h
 	$(CC) $(CFLAGS) -o $@ $<
 
 test: $(TEST_OUTPUT)
